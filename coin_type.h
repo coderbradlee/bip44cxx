@@ -74,10 +74,10 @@ struct Prefixes
 // POT   |     81     |        183       |  55/('P')       |   5/('3')  
 
 
-enum coin_code : uint32_t::list
-{
-	BTC =  {0, 0x0488ADE4, 0x0488B21E, 0x00, 5},
-	tBTC = {1, 0x04358394, 0x043587CF, 0x6f, 0xC4},
-	LTC = Prefixes {2, 0x0488ADE4, 0x0488B21E, 48, 50},
-	tLTC = Prefixes {1, 0x04358394, 0x04358394, 111, 196},
-};
+// enum coin_code : uint32_t::list
+// {
+// 	BTC =  {0, 0x0488ADE4, 0x0488B21E, 0x00, 5},
+// 	tBTC = {1, 0x04358394, 0x043587CF, 0x6f, 0xC4},
+// 	LTC = Prefixes {2, 0x0488ADE4, 0x0488B21E, 48, 50},
+// 	tLTC = Prefixes {1, 0x04358394, 0x04358394, 111, 196},
+// };
