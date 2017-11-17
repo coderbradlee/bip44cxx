@@ -98,7 +98,7 @@ void basetest()
 	int index=0;
 	bip44wallet wallet = bip44wallet();
 	wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
-	wallet.dumpKeys();
+	//wallet.dumpKeys();
 	
 	wallet.displayMasterKey();
 
@@ -112,6 +112,10 @@ void basetest()
 int main(int argc, char *argv[])
 {
 	
-	basetest();
+	// basetest();
+	// testMnemonic_MasterKey();
+	// testCoinConstructor_childKeyDisplay();
+	// testCoin_address(HD_Wallet().tBTC);
+	testCustomCoinPath(6);
 	return 0;
 }
