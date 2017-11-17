@@ -95,6 +95,7 @@ Prefixes matchPrefixTicker(std::string coin)
 }
 void basetest()
 {
+	int index=0;
 	bip44wallet wallet = bip44wallet();
 	wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
 	wallet.dumpKeys();
