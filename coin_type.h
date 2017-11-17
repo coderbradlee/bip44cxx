@@ -1,4 +1,8 @@
 #pragma once
+#include <bitcoin/bitcoin.hpp>
+#include <bitcoin/client.hpp>
+#include <vector>
+using namespace bc;
 //       |  BIP 44    |      mainnet     |     mainnet     |     mainnet     |  EXT_SECRET_KEY   |
 // Coin  | coin_type’ |    version_WIF   |  version_p2pkh  |  version_p2sh   | version_hd_secret | References
 // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
