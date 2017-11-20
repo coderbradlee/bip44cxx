@@ -1,12 +1,24 @@
 #pragma once
-#ifdef __cplusplus
-extern "C"{
-#endif
-#include "coin_type.h"
-
+// #ifdef __cplusplus
+// extern "C"{
+// #endif
+#include <bitcoin/bitcoin.hpp>
+#include <bitcoin/client.hpp>
+#include <vector>
 using namespace bc;
+// #include "coin_type.h"
+#include "interface.h"
 
+// using namespace bc;
+template<class T>
+std::string ToHex(const T &value)
+{
+  std::ostringstream oss;
+  if(!(oss<<std::hex<<value))throw "Invalid argument";
+  return oss.str();
+}
 Prefixes matchPrefixTicker2(std::string coin);
+// std::string bitcoin_address(const bc::ec_secret& se);
 class bip44wallet
 {
 public:
@@ -33,9 +45,9 @@ public:
 	//display output
 	void dumpKeys();
 	void displayMasterKey();
-
+	std::string getMasterKey();
 	void displayMnemonic();
-
+	std::string getMnemonic();
 	void displayChildSecretKey(int index);
 	// void displayChildWif(int index)
 	// {
@@ -50,14 +62,16 @@ public:
 	void addressRange(int start, int end);
 
 	//accesor
-	wallet::hd_private getMasterKey();
+	// wallet::hd_private getMasterKey();
 	
 	ec_secret childSecretKey(int index);
 	// wallet::hd_private childWif(int index)
 	// {
 	// 	return account.derive_private(0).derive_private(index);
 	// }
-
+	std::string getChildSecretKey(int index);
+	std::string getChildPublicKey(int index);
+	std::string getChildAddress(int index);
 	wallet::ec_public childPublicKey(int index);
 
 	wallet::payment_address childAddress(int index);
@@ -75,6 +89,6 @@ private:
 	wallet::hd_private account;
 };
 
-#ifdef __cplusplus
-}
-#endif
+// #ifdef __cplusplus
+// }
+// #endif

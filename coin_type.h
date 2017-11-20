@@ -1,11 +1,9 @@
 #pragma once
-#ifdef __cplusplus
-extern "C"{
-#endif
-#include <bitcoin/bitcoin.hpp>
-#include <bitcoin/client.hpp>
-#include <vector>
-using namespace bc;
+// #ifdef __cplusplus
+// extern "C"{
+// #endif
+
+#include <stdint.h>
 //       |  BIP 44    |      mainnet     |     mainnet     |     mainnet     |  EXT_SECRET_KEY   |
 // Coin  | coin_type’ |    version_WIF   |  version_p2pkh  |  version_p2sh   | version_hd_secret | References
 // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,6 +62,7 @@ using namespace bc;
 // XMR   |    128     |        N/A       |    /('4')       |    N/A          |  ???              |
 // ZEC   |    133     |        128       | 28 & b8 prefix/('t1')| (28 & bd)/('t3')| 76066276/('xprv') | https://github.com/zcash/zcash/blob/master/src/chainparams.cpp#L105
 // XTZ   |    ???     |        ???       | 6 & a19f prefix/('tz')|  ??             |  ??
+#ifdef __cplusplus
 struct Prefixes
 {
 	uint32_t bip44_code;
@@ -73,6 +72,8 @@ struct Prefixes
 	uint32_t P2SH;
 
 };
+#else
+
 // Coin  | coin_type’ |    version_WIF   |  version_p2pkh  |  version_p2sh   | version_hd_secret
 // POT   |     81     |        183       |  55/('P')       |   5/('3')  
 
@@ -85,6 +86,6 @@ struct Prefixes
 // 	tLTC = Prefixes {1, 0x04358394, 0x04358394, 111, 196},
 // };
 
-#ifdef __cplusplus
-}
+
 #endif
+

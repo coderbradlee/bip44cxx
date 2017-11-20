@@ -5,15 +5,107 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include "coin_type.h"
+// #include "coin_type.h"
 #include "bip44wallet.h"
 #include "interface.h"
+// #include <stdlib.h>
+// #include <stdio.h>
 using namespace bc;
-const char* testMnemonic_MasterKey(const char* mnemonic)
+voidstar walletInitFromMnemonic(const char* mnemonic)
+{
+	bip44wallet * ret = new bip44wallet(std::string(mnemonic));
+  	return (voidstar)ret;
+}
+voidstar walletInit()
+{
+	bip44wallet * ret = new bip44wallet();
+  	return (voidstar)ret;
+}
+
+voidstar walletInitFromCointype(Prefixes coin_code)
+{
+	bip44wallet * ret = new bip44wallet(coin_code);
+  	return (voidstar)ret;
+}
+voidstar walletInitFromCointypeAndMnemonic(const char* mnemonicSeed, Prefixes coin_code)
+{
+	bip44wallet * ret = new bip44wallet(mnemonicSeed,coin_code);
+  	return (voidstar)ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+void walletFree(voidstar f)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+    delete foo;
+}
+char* getMnemonic(voidstar f)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getMnemonic();
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* getMasterKey(voidstar f)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getMasterKey();
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* getChildKeyPath(voidstar f)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getChildKeyPath();
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* getChildSecretKey(voidstar f,int index)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getChildSecretKey(index);
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* getChildPublicKey(voidstar f,int index)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getChildPublicKey(index);
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* getChildAddress(voidstar f,int index)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	std::string ret=foo->getChildAddress(index);
+	char *buf = (char *)malloc(ret.length());
+	sprintf(buf, "%s", ret.c_str());
+	return buf;
+}
+char* FromMnemonicToMasterKey(const char* mnemonic)
 {	
 	//"label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha"
 	wallet::hd_private master(to_chunk(wallet::decode_mnemonic(split(std::string(mnemonic)))));
-	return master.encoded().c_str();
+	char *buf = (char *)malloc(300);
+	sprintf(buf, "%s", master.encoded().c_str());
+	return buf;
+	// return master.encoded().c_str();
 }
 void test()
 {

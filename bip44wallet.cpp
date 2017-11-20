@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include "coin_type.h"
+// #include "coin_type.h"
 #include "bip44wallet.h"
 using namespace bc;
 Prefixes matchPrefixTicker2(std::string coin)
@@ -42,6 +42,7 @@ bip44wallet::bip44wallet()
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	// std::cout<<"seed:"<<displayData_chunk(seed)<<std::endl;
 	// std::cout<<"entropy:"<<displayData_chunk(entropy)<<std::endl;
+	currentAccount=0;
 }
 bip44wallet::bip44wallet(Prefixes coin_code)
 {
@@ -51,7 +52,7 @@ bip44wallet::bip44wallet(Prefixes coin_code)
 	seed = to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
-
+	currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const data_chunk userSeed)
@@ -62,6 +63,7 @@ bip44wallet::bip44wallet(const data_chunk userSeed)
 	//seed = entropy; //to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(BTC);
+	currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const data_chunk userSeed, Prefixes coin_code)
@@ -71,6 +73,7 @@ bip44wallet::bip44wallet(const data_chunk userSeed, Prefixes coin_code)
 	//seed = entropy; //to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
+	currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const std::string mnemonicSeed)
@@ -81,6 +84,7 @@ bip44wallet::bip44wallet(const std::string mnemonicSeed)
 	//seed = to_chunk(hashSeed);
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(BTC);
+	currentAccount=0;
 }
 bip44wallet::bip44wallet(const std::string mnemonicSeed, Prefixes coin_code)
 {
@@ -89,6 +93,7 @@ bip44wallet::bip44wallet(const std::string mnemonicSeed, Prefixes coin_code)
 	//seed = to_chunk(hashSeed);
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
+	currentAccount=0;
 }
 void bip44wallet::setCoin(int bip44coin_code)
 {
@@ -121,7 +126,10 @@ void bip44wallet::displayMasterKey()
 {
 	std::cout << "\nMaster Private Key: " << wallet::hd_private(seed).encoded() << std::endl;
 }
-
+std::string bip44wallet::getMasterKey()
+{
+	return wallet::hd_private(seed).encoded();
+}
 void bip44wallet::displayMnemonic()
 {
 	if(wallet::validate_mnemonic(mnemonic))
@@ -132,7 +140,15 @@ void bip44wallet::displayMnemonic()
 		std::cout << "\n" << "Mnemonic Invalid! " << std::endl;
 	}
 }
-
+std::string bip44wallet::getMnemonic()
+{
+	if(wallet::validate_mnemonic(mnemonic))
+	{
+		return join(mnemonic);
+	}else{
+		return "";
+	}
+}
 void bip44wallet::displayChildSecretKey(int index)
 {
 	std::cout << "\nSecret Key: " << encode_base16(childSecretKey(index)) << std::endl;
@@ -162,8 +178,9 @@ void bip44wallet::displayData_chunk(const data_chunk& data)
 }
 std::string bip44wallet::getChildKeyPath()
 {
+	std::cout<<getCoinPrefixes().bip44_code<<std::endl;
 
-	return "Master / 0x8000002C / " + std::to_string(getCoinPrefixes().bip44_code) + " / " + std::to_string(getCurrentAccount()) + " / 0 / Child Index";
+	return "Master / 0x8000002C / 0x" + ToHex(getCoinPrefixes().bip44_code) + " / " + std::to_string(getCurrentAccount()) + " / 0 / Child Index";
 }
 void bip44wallet::addressRange(int start, int end)
 {
@@ -175,14 +192,41 @@ void bip44wallet::addressRange(int start, int end)
 }
 
 //accesor
-wallet::hd_private bip44wallet::getMasterKey()
-{
-	return wallet::hd_private(seed);
-}
-
+// wallet::hd_private bip44wallet::getMasterKey()
+// {
+// 	return wallet::hd_private(seed);
+// }
+// std::string bitcoin_address(const bc::ec_secret& secret)
+// {
+// 	// Convert secret to pubkey...
+// 	bc::ec_point pubkey = bc::secret_to_public_key(secret);
+// 	// Finally create address.
+// 	bc::payment_address payaddr; 
+// 	bc::set_public_key(payaddr, pubkey);
+// 	// Return encoded form.
+// 	return payaddr.encoded();
+// }
 ec_secret bip44wallet::childSecretKey(int index)
 {
 	return account.derive_private(0).derive_private(index);
+}
+std::string bip44wallet::getChildSecretKey(int index)
+{
+	ec_secret ret=account.derive_private(0).derive_private(index);
+	return encode_base16(ret);
+}
+std::string bip44wallet::getChildPublicKey(int index)
+{
+	wallet::ec_public publicPoint =account.derive_private(0).derive_public(index).point();
+	return publicPoint.encoded();
+}
+std::string bip44wallet::getChildAddress(int index)
+{
+	uint32_t coinCode = coin_type.bip44_code;
+	uint8_t addyPrefix = coin_type.P2KH; 
+	
+	wallet::payment_address address(account.derive_private(coinCode).derive_private(0).derive_public(0).derive_public(0).point(), addyPrefix);
+	return address.encoded();
 }
 // wallet::hd_private childWif(int index)
 // {

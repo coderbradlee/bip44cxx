@@ -5,7 +5,7 @@ CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 
 wallet: wallet.cpp bip44wallet.cpp
 	g++ -std=c++11 -o wallet wallet.cpp bip44wallet.cpp $(CFLAGS)
-	./wallet
+	# ./wallet
 bip44wallet.o:bip44wallet.cpp
 	g++ -std=c++11 -g $(CFLAGS) -fPIC -O2 -c bip44wallet.cpp
 interface.o:interface.cpp
