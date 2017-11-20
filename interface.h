@@ -3,7 +3,7 @@
 extern "C"{
 #endif
 extern void test();
-extern std::string testMnemonic_MasterKey(std::string mnemonic);
+extern const char* testMnemonic_MasterKey(const char* mnemonic);
 #ifdef __cplusplus
 }
 #endif

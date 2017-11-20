@@ -9,11 +9,11 @@
 #include "bip44wallet.h"
 #include "interface.h"
 using namespace bc;
-std::string testMnemonic_MasterKey(std::string mnemonic)
+const char* testMnemonic_MasterKey(const char* mnemonic)
 {	
 	//"label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha"
-	wallet::hd_private master(to_chunk(wallet::decode_mnemonic(split(mnemonic))));
-	return master.encoded();
+	wallet::hd_private master(to_chunk(wallet::decode_mnemonic(split(std::string(mnemonic)))));
+	return master.encoded().c_str();
 }
 void test()
 {
