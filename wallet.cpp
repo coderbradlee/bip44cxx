@@ -97,25 +97,26 @@ void basetest()
 {
 	int index=0;
 	bip44wallet wallet = bip44wallet();
-	wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
-	//wallet.dumpKeys();
 	
-	wallet.displayMasterKey();
+	// wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
+	// //wallet.dumpKeys();
+	
+	// wallet.displayMasterKey();
 
-	wallet.displayChildSecretKey(index);
+	// wallet.displayChildSecretKey(index);
 
-	wallet.displayChildAddress(index);
+	// wallet.displayChildAddress(index);
 
-	std::cout << "Master Key / Purpose Code / Coin Code / Account / Change(T/F) / Child Index" << std::endl;
-	std::cout << "Master / 44 / " << wallet.getCoinPrefixes().bip44_code << " / " << wallet.getCurrentAccount() << " / 0 / Child Index" << std::endl;
+	// std::cout << "Master Key / Purpose Code / Coin Code / Account / Change(T/F) / Child Index" << std::endl;
+	// std::cout << "Master / 44 / " << wallet.getCoinPrefixes().bip44_code << " / " << wallet.getCurrentAccount() << " / 0 / Child Index" << std::endl;
 }
 int main(int argc, char *argv[])
 {
 	
 	// basetest();
 	testMnemonic_MasterKey();
-	testCoinConstructor_childKeyDisplay();
-	testCoin_address(bip44wallet().tBTC);
-	testCustomCoinPath(6);
+	// testCoinConstructor_childKeyDisplay();
+	// testCoin_address(bip44wallet().tBTC);
+	// testCustomCoinPath(6);
 	return 0;
 }

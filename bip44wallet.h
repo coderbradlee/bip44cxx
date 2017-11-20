@@ -1,9 +1,12 @@
 #pragma once
+#ifdef __cplusplus
+extern "C"{
+#endif
 #include "coin_type.h"
 
 using namespace bc;
 
-
+Prefixes matchPrefixTicker2(std::string coin);
 class bip44wallet
 {
 public:
@@ -42,6 +45,7 @@ public:
 	void displayChildPublicKey(int index);
 
 	void displayChildAddress(int index);
+	void displayData_chunk(const data_chunk& data);
 	std::string getChildKeyPath();
 	void addressRange(int start, int end);
 
@@ -70,3 +74,7 @@ private:
 	wallet::hd_private coin;
 	wallet::hd_private account;
 };
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C"{
+#endif
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
 #include <vector>
@@ -81,3 +84,7 @@ struct Prefixes
 // 	LTC = Prefixes {2, 0x0488ADE4, 0x0488B21E, 48, 50},
 // 	tLTC = Prefixes {1, 0x04358394, 0x04358394, 111, 196},
 // };
+
+#ifdef __cplusplus
+}
+#endif

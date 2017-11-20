@@ -8,7 +8,31 @@
 #include "coin_type.h"
 #include "bip44wallet.h"
 using namespace bc;
+Prefixes matchPrefixTicker2(std::string coin)
+{
 
+	if(coin == "BTC")
+	{
+		return bip44wallet().BTC;
+	} else if(coin == "tBTC"){
+
+		return bip44wallet().tBTC;
+	}else if(coin == "LTC"){
+
+		return bip44wallet().LTC;
+
+	} else if(coin == "tLTC"){
+
+		return bip44wallet().tLTC;
+	} else if(coin=="POT"){
+		return bip44wallet().POT;
+	}
+	else {
+		
+		return bip44wallet().BTC;
+
+	}
+}
 bip44wallet::bip44wallet()
 {
 	data_chunk entropy = data_chunk(16);
@@ -16,7 +40,8 @@ bip44wallet::bip44wallet()
 	mnemonic = wallet::create_mnemonic(entropy);
 	seed = to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
-
+	// std::cout<<"seed:"<<displayData_chunk(seed)<<std::endl;
+	// std::cout<<"entropy:"<<displayData_chunk(entropy)<<std::endl;
 }
 bip44wallet::bip44wallet(Prefixes coin_code)
 {
@@ -125,6 +150,15 @@ void bip44wallet::displayChildPublicKey(int index)
 void bip44wallet::displayChildAddress(int index)
 {
 	std::cout << "\nAddress: " << childAddress(index).encoded() << std::endl;
+}
+void bip44wallet::displayData_chunk(const data_chunk& data)
+{
+	std::cout << "\ndata_chunk: ";
+	for(const auto& d:data)
+	{
+		std::cout<<std::to_string(d);
+	}
+	std::cout<<std::endl;
 }
 std::string bip44wallet::getChildKeyPath()
 {
