@@ -25,14 +25,20 @@ void testCoin_address(Prefixes coin)
 {
 	uint32_t coinCode = coin.bip44_code;
 	uint8_t addyPrefix = coin.P2KH; 
-	bip44wallet wallet("label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha", coin);
-	wallet::payment_address address(wallet::hd_private(to_chunk(wallet::decode_mnemonic(split("label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha")))).derive_private(44).derive_private(coinCode).derive_private(0).derive_public(0).derive_public(0).point(), addyPrefix);
-	if(address == wallet.childAddress(0))
-	{
-		std::cout << "testCoin_address: Success! \n" << std::endl;
+	std::string seed="label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha";
+	{		
+		bip44wallet wallet(seed, coin);
+		wallet::payment_address address(wallet::hd_private(to_chunk(wallet::decode_mnemonic(split(seed)))).derive_private(0x8000002C).derive_private(coinCode).derive_public(0x80000000).derive_public(0).derive_public(0).point(), addyPrefix);
+		if(address == wallet.childAddress(0))
+		{
+			std::cout << "testCoin_address: Success! \n" << std::endl;
+		}
+		wallet.displayChildAddress(0);
+		std::cout << address.encoded() << std::endl;
+		
+		std::cout<<"-------------------------------"<<std::endl;
 	}
-	wallet.displayChildAddress(0);
-	std::cout << address.encoded() << std::endl;
+	
 
 }
 void testCoinConstructor_childKeyDisplay()
@@ -96,27 +102,29 @@ Prefixes matchPrefixTicker(std::string coin)
 void basetest()
 {
 	int index=0;
-	bip44wallet wallet = bip44wallet();
-	
-	// wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
+	std::string seed="label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha";
+	bip44wallet wallet = bip44wallet(seed);
+
+	wallet.setCoinPrefixes(matchPrefixTicker("BTC"));
 	// //wallet.dumpKeys();
 	
-	// wallet.displayMasterKey();
+	wallet.displayMasterKey();
 
-	// wallet.displayChildSecretKey(index);
+	wallet.displayChildSecretKey(index);
 
-	// wallet.displayChildAddress(index);
+	wallet.displayChildAddress(index);
 
 	// std::cout << "Master Key / Purpose Code / Coin Code / Account / Change(T/F) / Child Index" << std::endl;
 	// std::cout << "Master / 44 / " << wallet.getCoinPrefixes().bip44_code << " / " << wallet.getCurrentAccount() << " / 0 / Child Index" << std::endl;
+	std::cout << "Master / 0x8000002C / 0x" + ToHex(wallet.getCoinPrefixes().bip44_code) + " / " + ToHex(wallet.getCurrentAccount()) + " / 0 / Child Index"<< std::endl;
 }
 int main(int argc, char *argv[])
 {
 	
 	// basetest();
-	testMnemonic_MasterKey();
+	// testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
-	// testCoin_address(bip44wallet().tBTC);
+	testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
 	return 0;
 }

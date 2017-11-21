@@ -42,7 +42,8 @@ bip44wallet::bip44wallet()
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	// std::cout<<"seed:"<<displayData_chunk(seed)<<std::endl;
 	// std::cout<<"entropy:"<<displayData_chunk(entropy)<<std::endl;
-	currentAccount=0;
+	setCoinPrefixes(BTC);
+	// currentAccount=0;
 }
 bip44wallet::bip44wallet(Prefixes coin_code)
 {
@@ -52,7 +53,7 @@ bip44wallet::bip44wallet(Prefixes coin_code)
 	seed = to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
-	currentAccount=0;
+	// currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const data_chunk userSeed)
@@ -63,7 +64,7 @@ bip44wallet::bip44wallet(const data_chunk userSeed)
 	//seed = entropy; //to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(BTC);
-	currentAccount=0;
+	// currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const data_chunk userSeed, Prefixes coin_code)
@@ -73,7 +74,7 @@ bip44wallet::bip44wallet(const data_chunk userSeed, Prefixes coin_code)
 	//seed = entropy; //to_chunk(wallet::decode_mnemonic(mnemonic));
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
-	currentAccount=0;
+	// currentAccount=0;
 }
 
 bip44wallet::bip44wallet(const std::string mnemonicSeed)
@@ -84,7 +85,7 @@ bip44wallet::bip44wallet(const std::string mnemonicSeed)
 	//seed = to_chunk(hashSeed);
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(BTC);
-	currentAccount=0;
+	// currentAccount=0;
 }
 bip44wallet::bip44wallet(const std::string mnemonicSeed, Prefixes coin_code)
 {
@@ -93,7 +94,7 @@ bip44wallet::bip44wallet(const std::string mnemonicSeed, Prefixes coin_code)
 	//seed = to_chunk(hashSeed);
 	purpose44Key = wallet::hd_private(seed).derive_private(0x8000002C);
 	setCoinPrefixes(coin_code);
-	currentAccount=0;
+	// currentAccount=0;
 }
 void bip44wallet::setCoin(int bip44coin_code)
 {
@@ -222,11 +223,12 @@ std::string bip44wallet::getChildPublicKey(int index)
 }
 std::string bip44wallet::getChildAddress(int index)
 {
-	uint32_t coinCode = coin_type.bip44_code;
-	uint8_t addyPrefix = coin_type.P2KH; 
+	// uint32_t coinCode = coin_type.bip44_code;
+	// uint8_t addyPrefix = coin_type.P2KH; 
 	
-	wallet::payment_address address(account.derive_private(coinCode).derive_private(0).derive_public(0).derive_public(0).point(), addyPrefix);
-	return address.encoded();
+	// wallet::payment_address address(account.derive_private(coinCode).derive_private(0).derive_public(0).derive_public(0).point(), addyPrefix);
+	// return address.encoded();
+	return childAddress(index).encoded();
 }
 // wallet::hd_private childWif(int index)
 // {

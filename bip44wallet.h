@@ -88,7 +88,14 @@ private:
 	wallet::hd_private coin;
 	wallet::hd_private account;
 };
+//sign
+// static hash_digest generate_signature_hash(const transaction& tx,
+//         uint32_t input_index, const script& script_code, uint8_t sighash_type);
 
+// static bool check_signature(const ec_signature& signature,
+//         uint8_t sighash_type, const data_chunk& public_key,
+//         const script& script_code, const transaction& tx,
+//         uint32_t input_index);
 // #ifdef __cplusplus
 // }
 // #endif

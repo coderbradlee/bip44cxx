@@ -98,6 +98,19 @@ char* getChildAddress(voidstar f,int index)
 	sprintf(buf, "%s", ret.c_str());
 	return buf;
 }
+void set_account(voidstar f,int account_num)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	foo->set_account(account_num);
+}
+int getCurrentAccount(voidstar f)
+{
+	bip44wallet * foo = (bip44wallet*)f;
+  	return foo->getCurrentAccount();
+}
+// void set_account(voidstar f,int account_num);
+// int getCurrentAccount(voidstar f);
+
 char* FromMnemonicToMasterKey(const char* mnemonic)
 {	
 	//"label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha"
