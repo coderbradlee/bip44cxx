@@ -143,14 +143,15 @@ UniValue Callcreaterawtransaction(std::string args)
         throw std::runtime_error(find_value(objError, "message").get_str());
     }
 }
-char* createrawtransaction(voidstar f)
+char* createrawtransaction(voidstar f,const char* reqjson)
 {
 	//UniValue createrawtransaction(const JSONRPCRequest& request)
 	// JSONRPCRequest request;
  //    request.strMethod = "createrawtransaction";
  //    request.params = RPCConvertValues(strMethod, vArgs);
  //    request.fHelp = false;
-	std::string req="createrawtransaction \"[{\"txid\":\"6c3f611cbd624e8a094f08b10f849b765d3548c13ace1704de050a44f504caff\",\"vout\":0}]\" \"{\"mxu9tvJsuZq1rxiaevcUJkuu6mv2LFhpSr\":0.1}\"";
+	std::string req="createrawtransaction "+std::string(reqjson)
+	//\"[{\"txid\":\"6c3f611cbd624e8a094f08b10f849b765d3548c13ace1704de050a44f504caff\",\"vout\":0}]\" \"{\"mxu9tvJsuZq1rxiaevcUJkuu6mv2LFhpSr\":0.1}\"";
 
 	UniValue raw=Callcreaterawtransaction(req);
 	return raw.get_str().c_str();
