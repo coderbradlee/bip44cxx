@@ -10,6 +10,9 @@
 #include "interface.h"
 // #include <stdlib.h>
 // #include <stdio.h>
+#include "univalue/include/univalue.h"
+#include "rpc/server.h"
+#include "rpc/client.h"
 using namespace bc;
 voidstar walletInitFromMnemonic(const char* mnemonic)
 {
@@ -119,6 +122,38 @@ char* FromMnemonicToMasterKey(const char* mnemonic)
 	sprintf(buf, "%s", master.encoded().c_str());
 	return buf;
 	// return master.encoded().c_str();
+}
+UniValue Callcreaterawtransaction(std::string args)
+{
+    std::vector<std::string> vArgs;
+    boost::split(vArgs, args, boost::is_any_of(" \t"));
+    std::string strMethod = vArgs[0];
+    vArgs.erase(vArgs.begin());
+    JSONRPCRequest request;
+    request.strMethod = strMethod;
+    request.params = RPCConvertValues(strMethod, vArgs);
+    request.fHelp = false;
+    BOOST_CHECK(tableRPC[strMethod]);
+    rpcfn_type method = tableRPC[strMethod]->actor;
+    try {
+        UniValue result = (*method)(request);
+        return result;
+    }
+    catch (const UniValue& objError) {
+        throw std::runtime_error(find_value(objError, "message").get_str());
+    }
+}
+char* createrawtransaction(voidstar f)
+{
+	//UniValue createrawtransaction(const JSONRPCRequest& request)
+	// JSONRPCRequest request;
+ //    request.strMethod = "createrawtransaction";
+ //    request.params = RPCConvertValues(strMethod, vArgs);
+ //    request.fHelp = false;
+	std::string req="createrawtransaction \"[{\"txid\":\"6c3f611cbd624e8a094f08b10f849b765d3548c13ace1704de050a44f504caff\",\"vout\":0}]\" \"{\"mxu9tvJsuZq1rxiaevcUJkuu6mv2LFhpSr\":0.1}\"";
+
+	UniValue raw=Callcreaterawtransaction(req);
+	return raw.get_str().c_str();
 }
 void test()
 {
