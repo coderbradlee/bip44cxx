@@ -20,7 +20,7 @@ interface.o:interface.cpp
 	g++ -std=c++11 -g $(CFLAGS) -fPIC -O2 -c interface.cpp
 
 so: bip44wallet.o interface.o
-	g++ -std=c++11 $(CFLAGS) $(FLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
+	g++ -std=c++11 $(CFLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
 clean:
 	rm wallet *.o
 
