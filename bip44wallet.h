@@ -2,14 +2,18 @@
 // #ifdef __cplusplus
 // extern "C"{
 // #endif
+#undef WORDS_BIGENDIAN 
+#undef HAVE_BYTESWAP_H 
+#undef HAVE_ENDIAN_H 
+#undef BUILD_BITCOIN_INTERNAL
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
 #include <vector>
 using namespace bc;
 // #include "coin_type.h"
 #include "interface.h"
+#include "univalue.h"
 
-// using namespace bc;
 template<class T>
 std::string ToHex(const T &value)
 {
@@ -77,6 +81,8 @@ public:
 	wallet::payment_address childAddress(int index);
 	Prefixes getCoinPrefixes();
 	int getCurrentAccount();
+
+	UniValue Callcreaterawtransaction(std::string args);
 private:
 	//members
 	//data_chunk entropy;

@@ -58,7 +58,7 @@ void walletFree(voidstar f);
 
 // UniValue createrawtransaction(const JSONRPCRequest& request)
 
-char* createrawtransaction(voidstar f,const char* reqjson);
+// char* createrawtransaction(voidstar f,const char* reqjson);
 #ifdef __cplusplus
 }
 #endif
