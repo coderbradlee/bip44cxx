@@ -12,7 +12,7 @@
 using namespace bc;
 // #include "coin_type.h"
 #include "interface.h"
-#include "univalue.h"
+// #include "univalue.h"
 
 template<class T>
 std::string ToHex(const T &value)
@@ -82,7 +82,7 @@ public:
 	Prefixes getCoinPrefixes();
 	int getCurrentAccount();
 
-	UniValue Callcreaterawtransaction(std::string args);
+	// UniValue Callcreaterawtransaction(std::string args);
 private:
 	//members
 	//data_chunk entropy;

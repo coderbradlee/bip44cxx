@@ -8,9 +8,9 @@
 // #include "coin_type.h"
 // #include "bip44wallet.h"
 // #include "compat/endian.h"
-#include "server.h"
-#include "client.h"
-#include <boost/algorithm/string.hpp>
+// #include "server.h"
+// #include "client.h"
+// #include <boost/algorithm/string.hpp>
 #include "bip44wallet.h"
 using namespace bc;
 Prefixes matchPrefixTicker2(std::string coin)
@@ -260,24 +260,24 @@ int bip44wallet::getCurrentAccount()
 	return currentAccount;
 }
 
-UniValue bip44wallet::Callcreaterawtransaction(std::string args)
-{
-    std::vector<std::string> vArgs;
-    boost::split(vArgs, args, boost::is_any_of(" \t"));
-    std::string strMethod = vArgs[0];
-    vArgs.erase(vArgs.begin());
-    JSONRPCRequest request;
-    request.strMethod = strMethod;
-    request.params = RPCConvertValues(strMethod, vArgs);
-    request.fHelp = false;
-    // BOOST_CHECK(tableRPC[strMethod]);
-    rpcfn_type method = tableRPC[strMethod]->actor;
-    try {
-        UniValue result = (*method)(request);
-        return result;
-    }
-    catch (const UniValue& objError) {
-        // throw std::runtime_error(find_value(objError, "message").get_str());
-        throw "Callcreaterawtransaction";
-    }
-}
+// UniValue bip44wallet::Callcreaterawtransaction(std::string args)
+// {
+//     std::vector<std::string> vArgs;
+//     boost::split(vArgs, args, boost::is_any_of(" \t"));
+//     std::string strMethod = vArgs[0];
+//     vArgs.erase(vArgs.begin());
+//     JSONRPCRequest request;
+//     request.strMethod = strMethod;
+//     request.params = RPCConvertValues(strMethod, vArgs);
+//     request.fHelp = false;
+//     // BOOST_CHECK(tableRPC[strMethod]);
+//     rpcfn_type method = tableRPC[strMethod]->actor;
+//     try {
+//         UniValue result = (*method)(request);
+//         return result;
+//     }
+//     catch (const UniValue& objError) {
+//         // throw std::runtime_error(find_value(objError, "message").get_str());
+//         throw "Callcreaterawtransaction";
+//     }
+// }
