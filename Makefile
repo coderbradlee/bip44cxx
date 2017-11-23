@@ -1,5 +1,5 @@
 
-CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
+CFLAGS=`pkg-config --cflags libbitcoin --libs -Wl,--whole-archive libbitcoin libbitcoin-client`
 # FLAGS= -I/root/bitcoin/src -I/root/bitcoin/src/rpc -I/root/bitcoin/src/univalue/include -L/root/bitcoin/src
 # libbitcoin_server.a
 # LIBBITCOIN_COMMON=libbitcoin_common.a
