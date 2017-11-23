@@ -1,10 +1,10 @@
 
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
-#include <string.h>
-#include <iostream>
-#include <sstream>
-#include <vector>
+// #include <string.h>
+// #include <iostream>
+// #include <sstream>
+// #include <vector>
 // #include "coin_type.h"
 #include "bip44wallet.h"
 #include "interface.h"

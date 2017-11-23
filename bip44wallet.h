@@ -2,13 +2,13 @@
 // #ifdef __cplusplus
 // extern "C"{
 // #endif
-#undef WORDS_BIGENDIAN 
-#undef HAVE_BYTESWAP_H 
-#undef HAVE_ENDIAN_H 
-#undef BUILD_BITCOIN_INTERNAL
+// #undef WORDS_BIGENDIAN 
+// #undef HAVE_BYTESWAP_H 
+// #undef HAVE_ENDIAN_H 
+// #undef BUILD_BITCOIN_INTERNAL
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
-#include <vector>
+// #include <vector>
 using namespace bc;
 // #include "coin_type.h"
 #include "interface.h"
