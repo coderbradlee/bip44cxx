@@ -1,4 +1,4 @@
-
+#define _GLIBCXX_USE_CXX11_ABI 0
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
 // #include <string.h>
