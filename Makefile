@@ -1,5 +1,5 @@
 
-CFLAGS=`pkg-config --cflags libbitcoin --libs -Wl,--whole-archive libbitcoin libbitcoin-client`
+CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 # FLAGS= -I/root/bitcoin/src -I/root/bitcoin/src/rpc -I/root/bitcoin/src/univalue/include -L/root/bitcoin/src
 # libbitcoin_server.a
 # LIBBITCOIN_COMMON=libbitcoin_common.a
@@ -20,7 +20,7 @@ interface.o:interface.cpp
 	g++ -std=c++11 $(CFLAGS) -fPIC -O2 -c interface.cpp
 
 so: bip44wallet.o interface.o
-	g++ -std=c++11 $(CFLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
+	g++ $(CFLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
 clean:
 	rm wallet *.o
 
