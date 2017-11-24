@@ -1,7 +1,7 @@
 
 # CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 #depend on libbitcoin version3 libbitcoin-client version3
-FLAGS= -lbitcoin -lbitcoin-client -I/usr/local/include/bitcoin
+FLAGS= -std=c++11 -lbitcoin -lbitcoin-client -I/usr/local/include/bitcoin
 # libbitcoin_server.a
 # LIBBITCOIN_COMMON=libbitcoin_common.a
 # LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
@@ -20,9 +20,9 @@ so: bip44wallet.o interface.o
 	g++ $(FLAGS) bip44wallet.cpp interface.cpp -fPIC -shared -o libbip44wallet.so
 
 bip44wallet.o:bip44wallet.cpp
-	g++ -std=c++11 $(FLAGS) -fPIC -O2 -c bip44wallet.cpp
+	g++ $(FLAGS) -fPIC -O2 -c bip44wallet.cpp
 interface.o:interface.cpp
-	g++ -std=c++11 $(FLAGS) -fPIC -O2 -c interface.cpp
+	g++ $(FLAGS) -fPIC -O2 -c interface.cpp
 
 
 clean:
