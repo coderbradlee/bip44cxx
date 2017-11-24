@@ -1,7 +1,7 @@
 
 CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 #depend on libbitcoin version3 libbitcoin-client version3
-# FLAGS= -I/root/bitcoin/src -I/root/bitcoin/src/rpc -I/root/bitcoin/src/univalue/include -L/root/bitcoin/src
+FLAGS= -lbitcoin -lbitcoin-client
 # libbitcoin_server.a
 # LIBBITCOIN_COMMON=libbitcoin_common.a
 # LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
@@ -17,12 +17,12 @@ CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 	# ./wallet
 #tag golinktothiswrong
 so: bip44wallet.o interface.o
-	g++ $(CFLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
+	g++ $(CFLAGS) $(FLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
 
 bip44wallet.o:bip44wallet.cpp
-	g++ -std=c++11 $(CFLAGS) -fPIC -O2 -c bip44wallet.cpp
+	g++ -std=c++11 $(CFLAGS) $(FLAGS) -fPIC -O2 -c bip44wallet.cpp
 interface.o:interface.cpp
-	g++ -std=c++11 $(CFLAGS) -fPIC -O2 -c interface.cpp
+	g++ -std=c++11 $(CFLAGS) $(FLAGS) -fPIC -O2 -c interface.cpp
 
 
 clean:
