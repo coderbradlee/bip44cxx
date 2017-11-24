@@ -3,12 +3,8 @@
 #include <iostream>
 #include "bip44wallet.h"
 #include <sstream>
-#include <bitcoin/bitcoin/chain/script.hpp>
 
 using namespace bc;
-using namespace bc::chain;
-using namespace bc::machine;
-
 void genericConstructor()
 {
 	bip44wallet wallet = bip44wallet();
@@ -122,29 +118,29 @@ void basetest()
 	// std::cout << "Master / 44 / " << wallet.getCoinPrefixes().bip44_code << " / " << wallet.getCurrentAccount() << " / 0 / Child Index" << std::endl;
 	std::cout << "Master / 0x8000002C / 0x" + ToHex(wallet.getCoinPrefixes().bip44_code) + " / " + ToHex(wallet.getCurrentAccount()) + " / 0 / Child Index"<< std::endl;
 }
-void testsign()
-{
-	data_chunk tx_data;
-    decode_base16(tx_data, "0100000001b3807042c92f449bbf79b33ca59d7dfec7f4cc71096704a9c526dddf496ee0970000000000ffffffff0000000000");
-    transaction new_tx;
-    new_tx.from_data(tx_data);
+// void testsign()
+// {
+// 	data_chunk tx_data;
+//     decode_base16(tx_data, "0100000001b3807042c92f449bbf79b33ca59d7dfec7f4cc71096704a9c526dddf496ee0970000000000ffffffff0000000000");
+//     transaction new_tx;
+//     new_tx.from_data(tx_data);
 
-    script prevout_script;
-    prevout_script.from_string("dup hash160 [88350574280395ad2c3e2ee20e322073d94e5e40] equalverify checksig");
+//     script prevout_script;
+//     prevout_script.from_string("dup hash160 [88350574280395ad2c3e2ee20e322073d94e5e40] equalverify checksig");
 
-    endorsement out;
-    const uint32_t input_index = 0;
-    const auto sighash_type = sighash_algorithm::all;
-    const auto sighash = script::generate_signature_hash(new_tx, input_index, prevout_script, sighash_type);
-    const auto result = encode_base16(sighash);
-    std::string expected = "f89572635651b2e4f89778350616989183c98d1a721c911324bf9f17a0cf5bf0";
-    std::cout<<result<<std::endl;
-    std::cout<<expected<<std::endl;
-    std::cout<<expected.length()<<std::endl;
-}
+//     endorsement out;
+//     const uint32_t input_index = 0;
+//     const auto sighash_type = sighash_algorithm::all;
+//     const auto sighash = script::generate_signature_hash(new_tx, input_index, prevout_script, sighash_type);
+//     const auto result = encode_base16(sighash);
+//     std::string expected = "f89572635651b2e4f89778350616989183c98d1a721c911324bf9f17a0cf5bf0";
+//     std::cout<<result<<std::endl;
+//     std::cout<<expected<<std::endl;
+//     std::cout<<expected.length()<<std::endl;
+// }
 int main(int argc, char *argv[])
 {
-	testsign();	
+	// testsign();	
 	// basetest();
 	// testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();

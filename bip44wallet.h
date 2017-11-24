@@ -8,7 +8,7 @@
 // #undef BUILD_BITCOIN_INTERNAL
 #include <bitcoin/bitcoin.hpp>
 #include <bitcoin/client.hpp>
-// #include <vector>
+#include <vector>
 using namespace bc;
 // #include "coin_type.h"
 #include "interface.h"
