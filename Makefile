@@ -17,7 +17,7 @@ FLAGS= -lbitcoin -lbitcoin-client
 	# ./wallet
 #tag golinktothiswrong
 so: bip44wallet.o interface.o
-	g++ $(FLAGS) bip44wallet.o interface.o -fPIC -shared -o libbip44wallet.so
+	g++ $(FLAGS) bip44wallet.cpp interface.cpp -fPIC -shared -o libbip44wallet.so
 
 bip44wallet.o:bip44wallet.cpp
 	g++ -std=c++11 $(FLAGS) -fPIC -O2 -c bip44wallet.cpp
