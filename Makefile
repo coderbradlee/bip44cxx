@@ -1,7 +1,7 @@
 
 # CFLAGS=`pkg-config --cflags libbitcoin --libs libbitcoin libbitcoin-client`
 #depend on libbitcoin version3 libbitcoin-client version3
-FLAGS= -lbitcoin -lbitcoin-client
+FLAGS= -lbitcoin -lbitcoin-client -I/usr/local/include/bitcoin
 # libbitcoin_server.a
 # LIBBITCOIN_COMMON=libbitcoin_common.a
 # LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
