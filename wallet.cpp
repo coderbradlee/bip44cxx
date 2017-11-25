@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 	// basetest();
 	// testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
-	// testCoin_address(bip44wallet().BTC);
+	testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
 	return 0;
 }
