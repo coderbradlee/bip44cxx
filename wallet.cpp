@@ -28,7 +28,8 @@ void testCoin_address(Prefixes coin)
 	std::string seed="label stick flat innocent brother frost rebel aim creek six baby copper need side cannon student announce alpha";
 	{		
 		bip44wallet wallet(seed, coin);
-		wallet::payment_address address(wallet::hd_private(to_chunk(wallet::decode_mnemonic(split(seed)))).derive_private(0x8000002C).derive_private(coinCode).derive_public(0x80000000).derive_public(0).derive_public(0).point(), addyPrefix);
+		// wallet::payment_address address(wallet::hd_private(to_chunk(wallet::decode_mnemonic(split(seed)))).derive_private(0x8000002C).derive_private(coinCode).derive_public(0x80000000).derive_public(0).derive_public(0).point(), addyPrefix);
+		wallet::payment_address address(wallet::hd_private(to_chunk(wallet::decode_mnemonic(split(seed)))).derive_private(44).derive_private(coinCode).derive_public(0).derive_public(0).derive_public(0).point(), addyPrefix);
 		if(address == wallet.childAddress(0))
 		{
 			std::cout << "testCoin_address: Success! \n" << std::endl;
@@ -145,7 +146,7 @@ int main(int argc, char *argv[])
 	std::cout<<"#########################"<<std::endl;
 	testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
-	// testCoin_address(bip44wallet().BTC);
+	testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
 	return 0;
 }
