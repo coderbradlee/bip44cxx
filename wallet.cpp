@@ -146,6 +146,7 @@ int main(int argc, char *argv[])
 	std::cout<<"#########################"<<std::endl;
 	testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
+	std::cout<<"#########################"<<std::endl;
 	testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
 	return 0;
