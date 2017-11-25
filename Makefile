@@ -13,7 +13,7 @@ FLAGS= -std=c++11 -g -lbitcoin -lbitcoin-client -I/usr/local/include/bitcoin
 # xx=/root/bitcoin/src/libbitcoin_server.a /root/bitcoin/src/libbitcoin_util.a /root/bitcoin/src/libbitcoin_consensus.a /root/bitcoin/src/secp256k1/libsecp256k1.la /root/bitcoin/src/libbitcoin_common.a /root/bitcoin/src/libbitcoin_cli.a /root/bitcoin/src/crypto/libbitcoin_crypto.a -UWORDS_BIGENDIAN -UHAVE_BYTESWAP_H -UHAVE_ENDIAN_H
 # xx=/root/bitcoin/src/libbitcoin_server.a -DWORDS_BIGENDIAN -DHAVE_BYTESWAP_H -DHAVE_ENDIAN_H -DBUILD_BITCOIN_INTERNAL
 wallet: wallet.cpp bip44wallet.cpp
-	g++ -std=c++11 -o wallet wallet.cpp bip44wallet.cpp $(CFLAGS)
+	g++ -std=c++11 -o wallet wallet.cpp bip44wallet.cpp $(FLAGS)
 	./wallet
 #tag golinktothiswrong
 so: bip44wallet.o interface.o
