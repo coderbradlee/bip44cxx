@@ -142,7 +142,8 @@ int main(int argc, char *argv[])
 {
 	// testsign();	
 	basetest();
-	// testMnemonic_MasterKey();
+	std::cout<<"#########################"<<std::endl;
+	testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
 	// testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
