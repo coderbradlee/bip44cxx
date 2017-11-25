@@ -141,10 +141,10 @@ void basetest()
 int main(int argc, char *argv[])
 {
 	// testsign();	
-	// basetest();
+	basetest();
 	// testMnemonic_MasterKey();
 	// testCoinConstructor_childKeyDisplay();
-	testCoin_address(bip44wallet().BTC);
+	// testCoin_address(bip44wallet().BTC);
 	// testCustomCoinPath(6);
 	return 0;
 }
